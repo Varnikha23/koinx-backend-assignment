@@ -1,1 +1,20 @@
+{
+  "name": "worker-server",
+  "version": "1.0.0",
+  "description": "Worker server that publishes update events to NATS every 15 minutes",
+  "main": "job.js",
+  "scripts": {
+    "start": "node job.js",
+    "dev": "nodemon job.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "nats": "^2.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "author": "Your Name",
+  "license": "MIT"
+}
 
