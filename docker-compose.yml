@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+
+  nats:
+    image: nats
+    container_name: nats
+    ports:
+      - "4222:4222"
+
+  api-server:
+    build: ./api-server
+    container_name: api-server
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+      - nats
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/koinx
+      - NATS_URL=nats://nats:4222
+
+  worker-server:
+    build: ./worker-server
+    container_name: worker-server
+    depends_on:
+      - nats
+    environment:
+      - NATS_URL=nats://nats:4222
